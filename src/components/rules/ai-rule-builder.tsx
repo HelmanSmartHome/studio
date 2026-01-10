@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useFormState } from "react-dom";
+import { useEffect, useState, useActionState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -53,7 +52,7 @@ export function AIRuleBuilder() {
   const [isGenerating, setIsGenerating] = useState(false);
   const { toast } = useToast();
 
-  const [generateState, generateAction] = useFormState(generateRuleFromAI, {
+  const [generateState, generateAction] = useActionState(generateRuleFromAI, {
     message: "",
   });
 

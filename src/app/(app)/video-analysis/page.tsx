@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
-import { useFormState } from "react-dom";
+import { useState, useRef, ChangeEvent, useActionState, useEffect } from "react";
 import { Loader2, Upload, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,7 +24,7 @@ const initialState = {
 };
 
 export default function VideoAnalysisPage() {
-  const [state, formAction] = useFormState(analyzeVideoAction, initialState);
+  const [state, formAction] = useActionState(analyzeVideoAction, initialState);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -71,7 +70,7 @@ export default function VideoAnalysisPage() {
     formAction(formData);
   }
 
-  useState(() => {
+  useEffect(() => {
     if (state.message) {
       setIsAnalyzing(false);
       if (state.analysis) {
@@ -87,7 +86,7 @@ export default function VideoAnalysisPage() {
         });
       }
     }
-  });
+  }, [state, toast]);
 
 
   return (
