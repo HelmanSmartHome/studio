@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Bell, Home, Menu, Search, Users, Video, FileCog, ListChecks, AreaChart } from "lucide-react";
+import { Bell, Home, Menu, Search, Users, Video, FileCog, ListChecks, AreaChart, Film } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { SidebarNav } from "./sidebar";
@@ -25,6 +25,7 @@ const pathToTitle: { [key: string]: string } = {
   '/cameras': 'Cameras',
   '/cameras/import': 'Bulk Import Cameras',
   '/zones': 'Sites & Zones',
+  '/video-analysis': 'Video Analysis',
 };
 
 export function Header() {

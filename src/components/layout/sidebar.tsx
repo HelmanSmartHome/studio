@@ -10,6 +10,7 @@ import {
   Users,
   Video,
   Warehouse,
+  Film,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -24,6 +25,7 @@ const navItems = [
   { href: '/rules', icon: FileCog, label: 'Safety Rules' },
   { href: '/cameras', icon: Video, label: 'Cameras' },
   { href: '/zones', icon: Warehouse, label: 'Sites & Zones' },
+  { href: '/video-analysis', icon: Film, label: 'Video Analysis' },
   { href: '/analytics', icon: AreaChart, label: 'Analytics' },
   { href: '/users', icon: Users, label: 'User Management' },
 ];
