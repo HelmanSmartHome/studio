@@ -7,6 +7,8 @@ const formSchema = z.object({
   videoDataUri: z.string().min(1, {
     message: 'Please upload a video file.',
   }),
+  blurFaces: z.string().transform(v => v === 'true').optional(),
+  allowTraining: z.string().transform(v => v === 'true').optional(),
 });
 
 type FormState = {

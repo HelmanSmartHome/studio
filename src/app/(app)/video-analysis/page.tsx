@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { analyzeVideoAction } from "@/app/actions/video";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 
 const initialState = {
   message: "",
@@ -28,6 +29,8 @@ export default function VideoAnalysisPage() {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [blurFaces, setBlurFaces] = useState(false);
+  const [allowTraining, setAllowTraining] = useState(false);
   const { toast } = useToast();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +66,8 @@ export default function VideoAnalysisPage() {
     }
     setIsAnalyzing(true);
     formData.set("videoDataUri", videoSrc);
+    formData.set("blurFaces", String(blurFaces));
+    formData.set("allowTraining", String(allowTraining));
     formAction(formData);
   }
 
@@ -123,6 +128,16 @@ export default function VideoAnalysisPage() {
                   <video src={videoSrc} controls className="w-full h-full rounded-md" />
                 </div>
               )}
+               <div className="grid gap-4 pt-4">
+                <div className="flex items-center space-x-2">
+                  <Switch id="blur-faces" checked={blurFaces} onCheckedChange={setBlurFaces} />
+                  <Label htmlFor="blur-faces">Blur Faces</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch id="allow-training" checked={allowTraining} onCheckedChange={setAllowTraining} />
+                  <Label htmlFor="allow-training">Allow video to be used for training</Label>
+                </div>
+              </div>
             </div>
           </CardContent>
           <CardFooter className="border-t px-6 py-4">
