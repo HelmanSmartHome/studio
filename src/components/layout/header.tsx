@@ -12,8 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Bell, Home, Menu, Search, Users, Video, FileCog, ListChecks, AreaChart, Film } from "lucide-react";
-import Link from "next/link";
+import { Bell, Menu, Search } from "lucide-react";
 import { usePathname } from 'next/navigation';
 import { SidebarNav } from "./sidebar";
 

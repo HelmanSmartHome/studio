@@ -1,13 +1,11 @@
 'use client';
 
 import {
-  AreaChart,
   Bell,
   FileCog,
   Home,
   ListChecks,
   Shield,
-  Users,
   Video,
   Warehouse,
   Film,
@@ -15,7 +13,6 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 const navItems = [
@@ -26,8 +23,6 @@ const navItems = [
   { href: '/cameras', icon: Video, label: 'Cameras' },
   { href: '/zones', icon: Warehouse, label: 'Sites & Zones' },
   { href: '/video-analysis', icon: Film, label: 'Video Analysis' },
-  { href: '/analytics', icon: AreaChart, label: 'Analytics' },
-  { href: '/users', icon: Users, label: 'User Management' },
 ];
 
 export function SidebarNav({ isMobile = false }: { isMobile?: boolean }) {

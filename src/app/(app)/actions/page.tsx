@@ -38,26 +38,26 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { actions as mockActions } from "@/lib/data";
-import { format, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 
 export default function ActionsPage() {
 
     const getStatusBadgeClass = (status: string) => {
         switch (status) {
-            case 'Open': return 'bg-blue-100 text-blue-800';
-            case 'Assigned': return 'bg-purple-100 text-purple-800';
-            case 'Mitigated': return 'bg-yellow-100 text-yellow-800';
-            case 'Verified': return 'bg-green-100 text-green-800';
-            case 'Closed': return 'bg-gray-100 text-gray-800';
-            default: return 'bg-gray-100 text-gray-800';
+            case 'Open': return 'bg-sky-500/20 text-sky-400';
+            case 'Assigned': return 'bg-purple-500/20 text-purple-400';
+            case 'Mitigated': return 'bg-yellow-500/20 text-yellow-400';
+            case 'Verified': return 'bg-green-500/20 text-green-400';
+            case 'Closed': return 'bg-gray-500/20 text-gray-400';
+            default: return 'bg-gray-500/20 text-gray-400';
         }
     };
     const getPriorityBadgeClass = (priority: string) => {
         switch (priority) {
-            case 'High': return 'text-red-600';
-            case 'Medium': return 'text-orange-600';
-            case 'Low': return 'text-blue-600';
-            default: return 'text-gray-600';
+            case 'High': return 'text-destructive';
+            case 'Medium': return 'text-orange-400';
+            case 'Low': return 'text-sky-400';
+            default: return 'text-muted-foreground';
         }
     }
 

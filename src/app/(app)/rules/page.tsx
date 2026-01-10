@@ -33,11 +33,11 @@ import { AIRuleBuilder } from "@/components/rules/ai-rule-builder";
 export default function RulesPage() {
   const getSeverityBadgeClass = (severity: string) => {
     switch (severity) {
-      case 'Critical': return 'text-red-600';
-      case 'High': return 'text-orange-600';
-      case 'Med': return 'text-yellow-600';
+      case 'Critical': return 'text-destructive';
+      case 'High': return 'text-orange-400';
+      case 'Med': return 'text-yellow-400';
       case 'Low':
-      default: return 'text-blue-600';
+      default: return 'text-sky-400';
     }
   };
 
@@ -101,7 +101,7 @@ export default function RulesPage() {
                 <TableRow key={rule.id}>
                   <TableCell className="font-medium">{rule.name}</TableCell>
                   <TableCell>
-                    <Badge variant="outline">{rule.ruleType}</Badge>
+                    <Badge variant="secondary">{rule.ruleType}</Badge>
                   </TableCell>
                   <TableCell className={getSeverityBadgeClass(rule.severity)}>
                     {rule.severity}

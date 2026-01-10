@@ -21,14 +21,14 @@ export function RecentEvents() {
   const getSeverityBadgeClass = (severity: 'Low' | 'Med' | 'High' | 'Critical') => {
     switch (severity) {
       case 'Critical':
-        return 'bg-red-500 hover:bg-red-600';
+        return 'bg-destructive/80 text-destructive-foreground';
       case 'High':
-        return 'bg-orange-500 hover:bg-orange-600';
+        return 'bg-orange-500/80 text-secondary-foreground';
       case 'Med':
-        return 'bg-yellow-500 hover:bg-yellow-600 text-black';
+        return 'bg-yellow-500/80 text-secondary-foreground';
       case 'Low':
       default:
-        return 'bg-blue-500 hover:bg-blue-600';
+        return 'bg-sky-500/80 text-secondary-foreground';
     }
   };
 

@@ -40,10 +40,10 @@ import { cn } from "@/lib/utils";
 export default function CamerasPage() {
   const getStatusBadgeClass = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800';
-      case 'inactive': return 'bg-gray-100 text-gray-800';
-      case 'error': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'active': return 'bg-green-500/20 text-green-400 border-green-500';
+      case 'inactive': return 'bg-gray-500/20 text-gray-400 border-gray-500';
+      case 'error': return 'bg-red-500/20 text-red-400 border-red-500';
+      default: return 'bg-gray-500/20 text-gray-400 border-gray-500';
     }
   };
 

@@ -1,6 +1,5 @@
 import {
   File,
-  ListFilter,
   MoreHorizontal,
   PlusCircle,
 } from "lucide-react";
@@ -16,7 +15,6 @@ import {
 } from "@/components/ui/card";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -37,10 +35,10 @@ import { cn } from "@/lib/utils";
 export default function ZonesPage() {
   const getRiskBadgeClass = (risk: string) => {
     switch (risk) {
-      case 'High': return 'text-red-600 border-red-200';
-      case 'Medium': return 'text-orange-600 border-orange-200';
+      case 'High': return 'border-destructive text-destructive';
+      case 'Medium': return 'border-orange-400 text-orange-400';
       case 'Low':
-      default: return 'text-blue-600 border-blue-200';
+      default: return 'border-sky-400 text-sky-400';
     }
   };
 

@@ -3,18 +3,10 @@ import {
   File,
   ListFilter,
   MoreHorizontal,
-  PlusCircle,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -49,17 +41,6 @@ import {
 } from "@/components/ui/tabs";
 import { events as mockEvents, sites, zones } from "@/lib/data";
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-
-const getSeverityBadgeClass = (severity: string) => {
-  switch (severity) {
-    case 'Critical': return 'bg-red-500 hover:bg-red-600 text-primary-foreground';
-    case 'High': return 'bg-orange-500 hover:bg-orange-600 text-primary-foreground';
-    case 'Med': return 'bg-yellow-500 hover:bg-yellow-600 text-secondary-foreground';
-    case 'Low':
-    default: return 'bg-blue-500 hover:bg-blue-600 text-primary-foreground';
-  }
-};
 
 export default function EventsPage() {
   return (
