@@ -35,11 +35,11 @@ export default function VideoAnalysisPage() {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (file.size > 4 * 1024 * 1024) { // 4MB limit
+      if (file.size > 10 * 1024 * 1024) { // 10MB limit
         toast({
           variant: "destructive",
           title: "File Too Large",
-          description: "Please upload a video smaller than 4MB.",
+          description: "Please upload a video smaller than 10MB.",
         });
         if(fileInputRef.current) {
             fileInputRef.current.value = "";
@@ -101,7 +101,7 @@ export default function VideoAnalysisPage() {
           <CardHeader>
             <CardTitle>Upload Video</CardTitle>
             <CardDescription>
-              Select a video file to be analyzed by the AI. (Max 4MB)
+              Select a video file to be analyzed by the AI. (Max 10MB)
             </CardDescription>
           </CardHeader>
           <CardContent>
