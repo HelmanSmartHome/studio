@@ -1,3 +1,16 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "event-thumbnail-1",
+      "description": "A blurry image of a warehouse aisle.",
+      "imageUrl": "https://images.unsplash.com/photo-1601598851547-4302969d0614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3YXJlaG91c2UlMjBhaXNsZXxlbnwwfHx8fDE3NjgwODgwNTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "warehouse aisle"
+    },
+    {
+      "id": "event-thumbnail-2",
+      "description": "A blurry image of a forklift in a loading dock.",
+      "imageUrl": "https://images.unsplash.com/photo-1700262109093-c55bdb271495?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Zm9ya2xpZnQlMjBsb2FkaW5nfGVufDB8fHx8MTc2ODA4ODA1NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "forklift loading"
+    }
+  ]
 }
