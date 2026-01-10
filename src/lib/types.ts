@@ -25,7 +25,7 @@ export type Camera = {
   zoneId: string;
   manufacturer?: string;
   model?: string;
-  ingestionMode: 'DIRECT_RTSP' | 'VMS_URL' | 'SIMULATED';
+  ingestionMode: 'DIRECT_RTSP' | 'VMS_URL' | 'SIMULATED' | 'WEBCAM';
   streamUrl?: string;
   credentialRef?: string;
   preferredStreamProfile: 'MAIN' | 'SUB';

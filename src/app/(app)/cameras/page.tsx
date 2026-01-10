@@ -3,7 +3,6 @@ import {
   File,
   ListFilter,
   MoreHorizontal,
-  PlusCircle,
   Upload,
 } from "lucide-react";
 
@@ -36,6 +35,7 @@ import {
 } from "@/components/ui/table";
 import { cameras as mockCameras, sites, zones } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { AddCameraDialog } from "@/components/cameras/add-camera-dialog";
 
 export default function CamerasPage() {
   const getStatusBadgeClass = (status: string) => {
@@ -77,12 +77,7 @@ export default function CamerasPage() {
               </span>
             </Button>
           </Link>
-          <Button size="sm" className="h-8 gap-1">
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Add Camera
-            </span>
-          </Button>
+          <AddCameraDialog />
         </div>
       </div>
       <Card>
