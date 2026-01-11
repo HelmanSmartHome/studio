@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, ChangeEvent, useActionState, useEffect } from "react";
-import { Loader2, Upload, Wand2, PlusCircle, AlertTriangle } from "lucide-react";
+import { Loader2, Upload, Wand2, PlusCircle, AlertTriangle, Bone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -206,6 +206,30 @@ export default function VideoAnalysisPage() {
                 )}
             </CardContent>
             </Card>
+
+            <Card>
+                <CardHeader>
+                    <div className="flex items-center gap-2">
+                        <Bone className="h-5 w-5" />
+                        <CardTitle>Ergonomic Assessment</CardTitle>
+                    </div>
+                    <CardDescription>
+                        AI-powered ergonomic analysis using "X-Ray" vision.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                     {isAnalyzing ? (
+                         <div className="text-sm text-muted-foreground text-center">Assessing ergonomics...</div>
+                     ) : (
+                        <Textarea
+                        readOnly
+                        value={state.analysis?.ergonomicAssessment || "Ergonomic assessment will be displayed here."}
+                        className="h-48 resize-none"
+                        />
+                     )}
+                </CardContent>
+            </Card>
+
             <Card>
                 <CardHeader>
                     <CardTitle>Suggested Corrective Actions</CardTitle>

@@ -27,7 +27,8 @@ const SuggestedActionSchema = z.object({
 });
 
 export const AnalyzeVideoOutputSchema = z.object({
-  analysis: z.string().describe('A detailed analysis of the video content, including potential hazards identified.'),
+  analysis: z.string().describe('A detailed analysis of the video content, including potential general safety hazards identified.'),
+  ergonomicAssessment: z.string().describe('A detailed analysis of the ergonomic risks, commenting on posture, lifting techniques, and repetitive strain.'),
   riskLevel: z.enum(['Low', 'Medium', 'High', 'Critical']).describe("The overall risk level assessed from the video."),
   suggestedActions: z.array(SuggestedActionSchema).describe("A list of suggested corrective actions to mitigate identified risks."),
 });
