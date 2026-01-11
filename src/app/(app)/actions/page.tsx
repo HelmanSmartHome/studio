@@ -1,3 +1,5 @@
+
+'use client';
 import {
   File,
   ListFilter,
@@ -39,8 +41,14 @@ import {
 } from "@/components/ui/tabs";
 import { actions as mockActions } from "@/lib/data";
 import { formatDistanceToNow } from "date-fns";
+import { useEffect, useState } from "react";
 
 export default function ActionsPage() {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const getStatusBadgeClass = (status: string) => {
         switch (status) {
@@ -152,7 +160,7 @@ export default function ActionsPage() {
                       </TableCell>
                       <TableCell className="hidden md:table-cell">{action.owner}</TableCell>
                       <TableCell className="hidden md:table-cell">
-                        {formatDistanceToNow(new Date(action.dueDate), { addSuffix: true })}
+                        {isClient ? formatDistanceToNow(new Date(action.dueDate), { addSuffix: true }) : ''}
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>

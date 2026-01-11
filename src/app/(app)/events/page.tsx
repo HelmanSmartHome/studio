@@ -1,7 +1,8 @@
+
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   File,
   ListFilter,
@@ -50,6 +51,11 @@ import { EventDetailsDialog } from "@/components/events/event-details-dialog";
 export default function EventsPage() {
   const [selectedEvent, setSelectedEvent] = useState<SafetyEvent | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleViewDetails = (event: SafetyEvent) => {
     setSelectedEvent(event);
@@ -157,7 +163,7 @@ export default function EventsPage() {
                         {site?.name} - {zone?.name}
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
-                        {format(new Date(event.timestampStart), "PPpp")}
+                        {isClient ? format(new Date(event.timestampStart), "PPpp") : ''}
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>

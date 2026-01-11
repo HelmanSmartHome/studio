@@ -1,3 +1,6 @@
+
+'use client';
+
 import {
   Avatar,
   AvatarFallback,
@@ -14,8 +17,15 @@ import { events as mockEvents } from "@/lib/data"
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
+import { useEffect, useState } from "react";
 
 export function RecentEvents() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+      setIsClient(true);
+  }, []);
+  
   const recentEvents = mockEvents.slice(0, 5);
 
   const getSeverityBadgeClass = (severity: 'Low' | 'Med' | 'High' | 'Critical') => {
@@ -60,7 +70,7 @@ export function RecentEvents() {
               <div className="ml-auto flex flex-col items-end">
                 <Badge variant="default" className={cn("text-xs", getSeverityBadgeClass(event.severity))}>{event.severity}</Badge>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {formatDistanceToNow(new Date(event.createdAt), { addSuffix: true })}
+                  {isClient ? formatDistanceToNow(new Date(event.createdAt), { addSuffix: true }) : ''}
                 </p>
               </div>
             </div>
