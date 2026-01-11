@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import {
   File,
   ListFilter,
@@ -40,9 +43,19 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { events as mockEvents, sites, zones } from "@/lib/data";
+import type { SafetyEvent } from "@/lib/types";
 import { format } from "date-fns";
+import { EventDetailsDialog } from "@/components/events/event-details-dialog";
 
 export default function EventsPage() {
+  const [selectedEvent, setSelectedEvent] = useState<SafetyEvent | null>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const handleViewDetails = (event: SafetyEvent) => {
+    setSelectedEvent(event);
+    setIsDetailsOpen(true);
+  };
+
   return (
     <>
       <div className="flex items-center gap-4">
@@ -160,9 +173,11 @@ export default function EventsPage() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                             <DropdownMenuItem onSelect={() => handleViewDetails(event)}>
+                                View Details
+                              </DropdownMenuItem>
                             <DropdownMenuItem>Acknowledge</DropdownMenuItem>
                             <DropdownMenuItem>Create Action</DropdownMenuItem>
-                            <DropdownMenuItem>View Details</DropdownMenuItem>
                             <DropdownMenuSeparator />
                              <DropdownMenuItem className="text-destructive">Archive</DropdownMenuItem>
                           </DropdownMenuContent>
@@ -182,6 +197,11 @@ export default function EventsPage() {
           </Card>
         </TabsContent>
       </Tabs>
+      <EventDetailsDialog
+        event={selectedEvent}
+        isOpen={isDetailsOpen}
+        onOpenChange={setIsDetailsOpen}
+      />
     </>
   );
 }
