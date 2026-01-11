@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -51,13 +52,13 @@ export function EventDetailsDialog({ event, isOpen, onOpenChange }: EventDetails
                 <div>
                     <h3 className="font-semibold text-lg">Event Summary</h3>
                     <div className="text-sm text-muted-foreground space-y-2 mt-2">
-                        <p><strong>Rule:</strong> {event.ruleType}</p>
-                        <p><strong>Severity:</strong> <Badge variant="destructive">{event.severity}</Badge></p>
-                        <p><strong>Status:</strong> <Badge variant="outline" className="capitalize">{event.status}</Badge></p>
-                        <p><strong>Timestamp:</strong> {format(new Date(event.timestampStart), "PPpp")}</p>
-                        <p><strong>Duration:</strong> {event.durationSeconds} seconds</p>
-                        <p><strong>Confidence:</strong> {(event.confidence * 100).toFixed(1)}%</p>
-                        <p><strong>Camera:</strong> {event.cameraId}</p>
+                        <div><strong>Rule:</strong> {event.ruleType}</div>
+                        <div><strong>Severity:</strong> <Badge variant="destructive">{event.severity}</Badge></div>
+                        <div><strong>Status:</strong> <Badge variant="outline" className="capitalize">{event.status}</Badge></div>
+                        <div><strong>Timestamp:</strong> {format(new Date(event.timestampStart), "PPpp")}</div>
+                        <div><strong>Duration:</strong> {event.durationSeconds} seconds</div>
+                        <div><strong>Confidence:</strong> {(event.confidence * 100).toFixed(1)}%</div>
+                        <div><strong>Camera:</strong> {event.cameraId}</div>
                     </div>
                 </div>
                  <div>
