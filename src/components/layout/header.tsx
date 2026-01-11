@@ -25,6 +25,7 @@ const pathToTitle: { [key: string]: string } = {
   '/cameras/import': 'Bulk Import Cameras',
   '/zones': 'Sites & Zones',
   '/video-analysis': 'Video Analysis',
+  '/faq': 'FAQ',
 };
 
 export function Header() {

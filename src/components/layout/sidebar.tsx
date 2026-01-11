@@ -9,6 +9,7 @@ import {
   Video,
   Warehouse,
   Film,
+  HelpCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -23,6 +24,7 @@ const navItems = [
   { href: '/cameras', icon: Video, label: 'Cameras' },
   { href: '/zones', icon: Warehouse, label: 'Sites & Zones' },
   { href: '/video-analysis', icon: Film, label: 'Video Analysis' },
+  { href: '/faq', icon: HelpCircle, label: 'FAQ' },
 ];
 
 export function SidebarNav({ isMobile = false }: { isMobile?: boolean }) {
@@ -39,7 +41,7 @@ export function SidebarNav({ isMobile = false }: { isMobile?: boolean }) {
       <div className="flex-1">
         <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
           {navItems.map(({ href, icon: Icon, label, badge }) => {
-            const isActive = pathname === href;
+            const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
             return (
               <Link
                 key={label}
