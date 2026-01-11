@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, ChangeEvent, useActionState, useEffect } from "react";
-import { Loader2, Upload, Wand2 } from "lucide-react";
+import { Loader2, Upload, Wand2, PlusCircle, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,11 +17,18 @@ import { useToast } from "@/hooks/use-toast";
 import { analyzeVideoAction } from "@/app/actions/video";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import type { AnalyzeVideoOutput } from "@/ai/schemas/video-analysis";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-const initialState = {
+const initialState: {
+  message: string;
+  analysis?: AnalyzeVideoOutput;
+  issues?: string[];
+} = {
   message: "",
-  analysis: "",
 };
+
 
 export default function VideoAnalysisPage() {
   const [state, formAction] = useActionState(analyzeVideoAction, initialState);
@@ -88,12 +95,31 @@ export default function VideoAnalysisPage() {
     }
   }, [state, toast]);
 
+    const getRiskBadgeClass = (riskLevel?: 'Low' | 'Medium' | 'High' | 'Critical') => {
+        switch (riskLevel) {
+            case 'Critical': return 'bg-destructive/80 text-destructive-foreground';
+            case 'High': return 'bg-orange-500/80 text-secondary-foreground';
+            case 'Medium': return 'bg-yellow-500/80 text-secondary-foreground';
+            case 'Low':
+            default: return 'bg-sky-500/80 text-secondary-foreground';
+        }
+    };
+    
+    const getPriorityBadgeClass = (priority: 'Low' | 'Medium' | 'High') => {
+        switch (priority) {
+            case 'High': return 'text-destructive';
+            case 'Medium': return 'text-orange-400';
+            case 'Low': return 'text-sky-400';
+            default: return 'text-muted-foreground';
+        }
+    }
+
 
   return (
-    <div className="mx-auto grid max-w-4xl flex-1 auto-rows-max gap-4">
+    <div className="mx-auto grid max-w-6xl flex-1 auto-rows-max gap-4">
       <div className="flex items-center gap-4">
         <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-          Video Analysis
+          Video Risk Assessment
         </h1>
       </div>
       <form action={handleFormAction} className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -101,7 +127,7 @@ export default function VideoAnalysisPage() {
           <CardHeader>
             <CardTitle>Upload Video</CardTitle>
             <CardDescription>
-              Select a video file to be analyzed by the AI. (Max 10MB)
+              Select a video file to be analyzed for safety risks. (Max 10MB)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -150,28 +176,66 @@ export default function VideoAnalysisPage() {
             </Button>
           </CardFooter>
         </Card>
-        <Card className="lg:col-span-3">
-          <CardHeader>
-            <CardTitle>AI Analysis</CardTitle>
-            <CardDescription>
-              The AI-generated analysis of the video will appear here.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isAnalyzing ? (
-                <div className="flex flex-col items-center justify-center h-48">
-                    <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-                    <p className="mt-4 text-sm text-muted-foreground">Analyzing video, please wait...</p>
+        <div className="lg:col-span-3 space-y-4">
+            <Card>
+            <CardHeader>
+                <div className="flex items-center justify-between">
+                    <CardTitle>AI Risk Assessment</CardTitle>
+                    {state.analysis?.riskLevel && (
+                        <Badge className={cn("text-sm", getRiskBadgeClass(state.analysis.riskLevel))}>
+                           <AlertTriangle className="mr-2 h-4 w-4" /> {state.analysis.riskLevel}
+                        </Badge>
+                    )}
                 </div>
-            ) : (
-                <Textarea
-                    readOnly
-                    value={state.analysis || "Analysis will be displayed here."}
-                    className="h-48 resize-none"
-                    />
-            )}
-          </CardContent>
-        </Card>
+                <CardDescription>
+                The AI-generated analysis of the video will appear here.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                {isAnalyzing ? (
+                    <div className="flex flex-col items-center justify-center h-48">
+                        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                        <p className="mt-4 text-sm text-muted-foreground">Analyzing video, please wait...</p>
+                    </div>
+                ) : (
+                    <Textarea
+                        readOnly
+                        value={state.analysis?.analysis || "Analysis will be displayed here."}
+                        className="h-48 resize-none"
+                        />
+                )}
+            </CardContent>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Suggested Corrective Actions</CardTitle>
+                    <CardDescription>
+                    AI-recommended actions to mitigate identified risks.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                     {isAnalyzing ? (
+                         <div className="text-sm text-muted-foreground text-center">Generating suggestions...</div>
+                     ) : state.analysis?.suggestedActions && state.analysis.suggestedActions.length > 0 ? (
+                        <div className="space-y-3">
+                            {state.analysis.suggestedActions.map((action, index) => (
+                                <div key={index} className="flex items-start justify-between gap-4">
+                                    <div className="flex-1">
+                                        <p className="font-medium">{action.action}</p>
+                                        <p className={cn("text-xs font-bold", getPriorityBadgeClass(action.priority))}>{action.priority} Priority</p>
+                                    </div>
+                                    <Button variant="outline" size="sm">
+                                        <PlusCircle className="mr-2 h-4 w-4"/> Create Action
+                                    </Button>
+                                </div>
+                            ))}
+                        </div>
+                     ) : (
+                        <p className="text-sm text-muted-foreground text-center">No actions suggested, or analysis not yet performed.</p>
+                     )}
+                </CardContent>
+            </Card>
+        </div>
       </form>
     </div>
   );

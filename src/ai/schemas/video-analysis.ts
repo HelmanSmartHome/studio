@@ -20,7 +20,15 @@ export const AnalyzeVideoInputSchema = z.object({
 });
 export type AnalyzeVideoInput = z.infer<typeof AnalyzeVideoInputSchema>;
 
+
+const SuggestedActionSchema = z.object({
+    action: z.string().describe("A brief, actionable suggestion."),
+    priority: z.enum(['Low', 'Medium', 'High']).describe("The priority of the suggested action."),
+});
+
 export const AnalyzeVideoOutputSchema = z.object({
-  analysis: z.string().describe('A detailed analysis of the video content.'),
+  analysis: z.string().describe('A detailed analysis of the video content, including potential hazards identified.'),
+  riskLevel: z.enum(['Low', 'Medium', 'High', 'Critical']).describe("The overall risk level assessed from the video."),
+  suggestedActions: z.array(SuggestedActionSchema).describe("A list of suggested corrective actions to mitigate identified risks."),
 });
 export type AnalyzeVideoOutput = z.infer<typeof AnalyzeVideoOutputSchema>;

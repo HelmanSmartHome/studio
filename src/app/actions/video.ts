@@ -1,6 +1,7 @@
 'use server';
 
 import { analyzeVideo, type AnalyzeVideoInput } from '@/ai/flows/video-analysis-flow';
+import type { AnalyzeVideoOutput } from '@/ai/schemas/video-analysis';
 import { z } from 'zod';
 
 const formSchema = z.object({
@@ -13,7 +14,7 @@ const formSchema = z.object({
 
 type FormState = {
   message: string;
-  analysis?: string;
+  analysis?: AnalyzeVideoOutput;
   issues?: string[];
 };
 
@@ -36,7 +37,7 @@ export async function analyzeVideoAction(
     const result = await analyzeVideo(input);
     return {
         message: 'Video analyzed successfully.',
-        analysis: result.analysis,
+        analysis: result,
     }
   } catch (error) {
     console.error(error);
